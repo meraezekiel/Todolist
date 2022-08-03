@@ -8,7 +8,7 @@ import { createStackNavigator } from '@react-navigation/stack';
  
 import HomeScreen from './Nav/Home';
 import AddScreen from './Nav/Add';
-
+// test
 const Stack = createStackNavigator();
 
 const Nav = () => {
