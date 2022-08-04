@@ -18,8 +18,8 @@ const AddScreen = ({ navigation }) => {
   
  
   let adding_task = () => {
-    console.log(taskTitle, taskDesc);
-    console.log(db);
+    //console.log(taskTitle, taskDesc);
+    //console.log(db);
  
     if (!taskTitle) {
         Alert.alert ("Error","Please fill out empty fields");
@@ -29,7 +29,6 @@ const AddScreen = ({ navigation }) => {
         Alert.alert ("Error","Please fill out empty fields");
       return;
     }
-    
     db.transaction(function (tx) {
       tx.executeSql(
         'INSERT INTO louie(task_title, task_desc) VALUES (?,?)',
@@ -38,17 +37,17 @@ const AddScreen = ({ navigation }) => {
           console.log('Results', results.rowsAffected);
           if (results.rowsAffected > 0) {
             Alert.alert(
-              'Successfully Added',
-              
+              "Congratulations",
+              "Successfully Added",
               [
                 {
-                  text: 'Ok',
-                  onPress: () => navigation.navigate('HomeScreen'),
+                  text: "Cancel"
                 },
-              ],
-              { cancelable: false }
+                { text: "OK", onPress: () => navigation.navigate('HomeScreen') }
+              ]
             );
-          } else alert('Save Failed');
+        
+          } 
         }
       );
     });
