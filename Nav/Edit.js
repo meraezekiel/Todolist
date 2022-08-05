@@ -36,27 +36,6 @@ export default function EditScreen ({route ,navigation}){
     };
     
  
-
-// useEffect(()=>{
-//     console.log (louie_id);
-//     db.transaction((tx) => {
-//         tx.executeSql(
-//           'SELECT * FROM louie where louie_id ='+{louie_id},
-//           [louie_id,task_title,task_desc],
-//           (tx, results) => {
-//             var len = results.rows.length;
-//             if (len > 0) {
-//               let res = results.rows.item(0);
-//               updateAllStates(res.louie_id, res.task_title, res.task_desc);
-//             } else {
-//               alert('No user found');
-//               updateAllStates('', '', '');
-//             }
-//           },
-//         );
-//       });
-// });
-
   let update = () => {
     console.log(state.taskTitle, state.taskDesc);
   
