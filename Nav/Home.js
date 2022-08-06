@@ -7,7 +7,7 @@ var db = openDatabase({ name: 'louieDatabase.db' });
 const COLORS = {primary: '#1f145c', white: '#fff', black:'#000000', lblack:'#383C39', orange:'#FDBF1B',
 swhite: '#BDBDB0'};
 const HomeScreen = ({ navigation }) => {
-  let [todos, setTodos] = useState({});
+  let [todos, setTodos] = useState([]);
 
   useEffect(() => {
     db.transaction((tx) => {
@@ -68,11 +68,7 @@ const confirmDelete =()=>{
     });
 
   };
-const trylng=()=>{
 
-  Alert.alert('Try','long press ni boy!');
-  console.log ('');
-};
   return (
     <SafeAreaView style={styles.safe}>
         <View style = {styles.header}>
@@ -85,12 +81,13 @@ const trylng=()=>{
         
         </View>
         <FlatList
+          
           showsVerticalScrollIndicator = {false}
           contentContainerStyle={{padding:20, paddingBottom:100}}
           data={todos} renderItem = {({item})=>(
           <TouchableOpacity 
           onPress={()=>navigation.navigate('EditScreen',item)}
-          onLongPress={()=>trylng(item)}>
+         >
           <ListItem todo = {item}></ListItem>
           </TouchableOpacity> )}></FlatList>
 
