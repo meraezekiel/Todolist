@@ -29,8 +29,8 @@ const AddScreen = ({ navigation }) => {
   let adding_task = () => {
    // console.log(taskTitle, taskDesc);
     
-    let r = (Math.floor(100000 + Math.random() * 900000));
-    console.log(r);
+   // let r = (Math.floor(100000 + Math.random() * 900000));
+   // console.log(r);
  
     if (!taskTitle) {
         Alert.alert ("Error","Please fill out empty fields");
@@ -43,8 +43,8 @@ const AddScreen = ({ navigation }) => {
     
     db.transaction(function (tx) {
       tx.executeSql(
-        'INSERT INTO louie(louie_id,task_title, task_desc)VALUES (?,?,?)',
-        [r,taskTitle, taskDesc],
+        'INSERT INTO louie(task_title, task_desc)VALUES (?,?)',
+        [taskTitle, taskDesc],
         (tx, results) => {
           console.log('Results', results.rowsAffected);
           if (results.rowsAffected > 0) {
