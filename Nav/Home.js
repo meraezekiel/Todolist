@@ -4,7 +4,7 @@ import { TextInput } from 'react-native-gesture-handler';
 import { openDatabase } from 'react-native-sqlite-storage';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
-// import CheckBox from '@react-native-community/checkbox';
+
 var db = openDatabase({ name: 'louieDatabase2.db' });
 
  
@@ -27,6 +27,7 @@ const HomeScreen = ({ navigation }) => {
         for (let i = 0; i < results.rows.length; ++i)
           temp.push(results.rows.item(i));
         setTodos(temp);
+        setFilteredDataSource(temp);
       });
     });
   }, []);
@@ -56,22 +57,16 @@ const searchFilterFunction = (text) => {
   // Check if searched text is not blank
   if (text) {
    
-    const newData = setTodos.filter(
+    const newData = todos.filter(
       function (item) {
-        // Applying filter for the inserted text in search bar
-        const itemData = item.task_title
-            ? item.task_title.toUpperCase()
-            : ''.toUpperCase();
-        const textData = text.toUpperCase();
-        return itemData.indexOf(textData) > -1;
-      }
-    );
+        return item.task_title.toLowerCase().match(text.toLowerCase())
+      });
     setFilteredDataSource(newData);
     
   } else {
     // Inserted text is blank
     // Update FilteredDataSource with masterDataSource
-    setFilteredDataSource(setTodos);
+    setFilteredDataSource(todos);
     
   }
   setSearch(text);
@@ -81,47 +76,40 @@ const searchFilterFunction = (text) => {
     <SafeAreaView style={styles.safe}>
         <View style = {styles.iconheader}>
             <FontAwesome5 name= "bars" size = {25} color = {COLORS.black}></FontAwesome5>
-            <View style = {{flexDirection:'row'}}>
+            <View style = {{flexDirection:'row', justifyContent:'center'}}>
 
-            <TextInput onChangeText={(search) => setFilteredDataSource(search)}
+            <TextInput onChangeText={(search) => searchFilterFunction(search)}
             
             placeholder='Search Here' 
-            style = {{width:190, height:50 ,color:COLORS.black,borderWidth:0.2
-            ,marginRight:30, borderRadius:10, padding:10,}}></TextInput>
+            style = {{width:'75%', height:50 ,color:COLORS.black,borderWidth:0.2
+            , borderRadius:10, padding:10}}></TextInput>
 
 
               <View style = {{marginRight:20}}>
-                <TouchableOpacity onPress={()=>searchFilterFunction()}>
-            <FontAwesome5 name= "search" size = {25} color = {COLORS.black}></FontAwesome5>
-            </TouchableOpacity>
+         
             </View>
             <FontAwesome5 name= "bell" size = {25} color = {COLORS.black}></FontAwesome5>
             </View>
             
 
-        </View>
-        <View style = {styles.header}>
-        <Text style = {styles.watsup}>
-          Hey, What's up!
-        </Text>
-        </View>
+            </View>
+            <View style = {styles.header}>
+            <Text style = {styles.watsup}>
+              Hey, What's up!
+            </Text>
+            </View>
 
-       { /*/////////////////////categories//////////////////*/}
+          
+            <View style = {{marginLeft:20, marginTop: 10}}>
+              <Text style = {{color:COLORS.lblack, fontWeight:'bold'}}>TODAY'S TASK</Text>
+            </View>
        
-
-       { /*//////////////////////end of categories/////////////*/ }
-
-       { /*//////////////////////today's  task/////////////*/ }    
-          <View style = {{marginLeft:20, marginTop: 10}}>
-            <Text style = {{color:COLORS.lblack, fontWeight:'bold'}}>TODAY'S TASK</Text>
-          </View>
-      { /*//////////////////////end today's  task/////////////*/ }    
       
         <FlatList
           
           showsVerticalScrollIndicator = {false}
           contentContainerStyle={{padding:20, paddingBottom:100}}
-          data={todos}
+          data={filteredDataSource}
           renderItem = {({item})=>(
           <TouchableOpacity 
            onPress={()=>navigation.navigate('EditScreen',item)}>

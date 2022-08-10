@@ -10,7 +10,6 @@ import {
   Text
 } from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import CheckBox from '@react-native-community/checkbox';
 import {openDatabase} from 'react-native-sqlite-storage';
 const db = openDatabase({ name: 'louieDatabase2.db' , createFromLocation: 1});
 
@@ -139,25 +138,7 @@ export default function EditScreen ({route ,navigation}){
               style={{ textAlignVertical: 'top', padding: 20 , color:COLORS.black , fontSize:15,}}
             />
            </View>
-            
-           {/* <View style={styles.container}>
-                    <View style={styles.checkboxContainer}>
-                    <CheckBox
-                      value={isSelected}
-                      onValueChange={setSelection}
-                      style={styles.checkbox}
-                    />
-
-                    <Text style={styles.label}
-                      onChangeText={
-                      (taskCategory) => setTaskCategory(taskCategory)}
-                     
-                    >{isSelected ? "Business" : "Personal"}</Text>
-                    </View>
-                    </View> */}
-
-
-
+     
            <TouchableOpacity onPress ={()=>update()}>
              
               {/*save*/}  

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { View,StyleSheet, Alert,ScrollView,KeyboardAvoidingView, TouchableOpacity, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import CheckBox from '@react-native-community/checkbox';
 import { TextInput } from 'react-native-gesture-handler';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { openDatabase } from 'react-native-sqlite-storage';
@@ -17,10 +16,7 @@ const AddScreen = ({ navigation }) => {
   let [taskTitle, setTaskTitle] = useState('');
   let [taskDesc, setTaskDesc] = useState('');
   let [taskCategory, setTaskCategory] = useState('');
-  
-  //const [isSelected, setSelection] = useState(false);
 
-  
   const returnes =()=>{
     navigation.reset({
       index: 0,
@@ -31,10 +27,6 @@ const AddScreen = ({ navigation }) => {
   
 
   let adding_task = () => {
-   // console.log(taskTitle, taskDesc);
-    
-   // let r = (Math.floor(100000 + Math.random() * 900000));
-   // console.log(r);
  
     if (!taskTitle) {
         Alert.alert ("Error","Please fill out empty fields");
@@ -105,23 +97,6 @@ const AddScreen = ({ navigation }) => {
                       style={{ textAlignVertical: 'top', padding: 20 , color:COLORS.black , fontSize:15,}}
                     />
                    </View>
-
-                   {/* <View style={styles.container}>
-                    <View style={styles.checkboxContainer}>
-                    <CheckBox
-                      value={isSelected}
-                      onValueChange={setSelection}
-                      style={styles.checkbox}
-                    />
-
-                    <TextInput style={styles.label}
-                      onValueChange={
-                      (taskCategory) => setTaskCategory(taskCategory)}
-                     
-                    >{isSelected ? "Business" : "Personal"}</TextInput>
-                    </View>
-                    </View> */}
-
 
 
                    <TouchableOpacity onPress ={()=>adding_task()}>
